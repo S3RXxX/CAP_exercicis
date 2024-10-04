@@ -20,14 +20,16 @@
   )
 
 (println "prod-of-evens 20:" (prod-of-evens '(2 10 5)))
-(println "prod-of-evens :" (prod-of-evens '(3 1 5)))
+(println "prod-of-evens 1:" (prod-of-evens '(3 1 5)))
 
 (println)
 
 ;3
-;(defn my-reverse [lst])
-;reduce
-;(println "my-reverse (3 4 7 8 7): " (my-reverse '(7 8 7 4 3)))
+(defn my-reverse [lst]
+  (reduce conj '() lst)
+  )
+
+(println "my-reverse (3 4 7 8 7): " (my-reverse '(7 8 7 4 3)))
 
 (println)
 
