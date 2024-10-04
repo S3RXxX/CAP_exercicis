@@ -2,7 +2,7 @@
 
 ;1
 (defn fn1 [lst]
-     ((comp (partial reduce +) (partial map (partial * 2)) (partial filter even?)) lst)
+     ((comp (partial apply +) (partial map (partial * 2)) (partial filter even?)) lst)
 )
 
 (println "fn1 4 :" (fn1 '(1 2 3)))
