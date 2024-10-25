@@ -40,27 +40,21 @@
   (fn
     ([kw]
      (let [[x y] (deref coords)]
-     (if (= kw :crt)
-       (deref coords)
-       (if (= kw :plr)
-         (list (Math/sqrt (+ (* x x) (* y y))) (/ (* (Math/atan2 y x) 180) Math/PI))
-         (if (= kw :rst)
-           (reset! coords [0 0])
-           (if (= kw :inx)
-             (swap! coords (fn [v] (let [[x y] v] [(inc x) y])))
-             (if (= kw :iny)
-               (swap! coords (fn [v] (let [[x y] v] [x (inc y)])))
-               '())
-             )
-           
-           )
-         ))))
+     (cond (= kw :crt) (deref coords)
+           (= kw :plr) (list (Math/sqrt (+ (* x x) (* y y))) (/ (* (Math/atan2 y x) 180) Math/PI))
+           (= kw :rst) (reset! coords [0 0])
+           (= kw :inx) (swap! coords (fn [v] (let [[x y] v] [(inc x) y])))
+           (= kw :iny) (swap! coords (fn [v] (let [[x y] v] [x (inc y)])))
+
+         )))
     ([kw p]
-     (let [[x y] (deref coords)]
-     (if (= kw :dst)
-       ((comp Math/sqrt (partial reduce +) (partial map #(* % %)) (partial map -)) [x y] (p :crt))
-       '())))))
-  )
+      (let [[x y] (deref coords)]
+        (cond (= kw :dst)
+              ((comp Math/sqrt (partial reduce +) (partial map #(* % %)) (partial map -)) [x y] (p :crt)))))) 
+    
+    )
+    )
+  
 
 (println "Exercici 2")
 (def p (punt))

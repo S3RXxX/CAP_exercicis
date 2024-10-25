@@ -25,21 +25,18 @@
 (defn punt [x y]
   (fn
     ([kw] 
-     (if (= kw :crt)
-      (list x y)
-      (if (= kw :plr) 
-        (list (Math/sqrt (+ (* x x) (* y y))) (/ (* (Math/atan2 y x) 180) Math/PI))
-        '()
-        )) 
-     )
+     (cond (= kw :crt) (list x y)
+           (= kw :plr) (list (Math/sqrt (+ (* x x) (* y y))) (/ (* (Math/atan2 y x) 180) Math/PI))
+           
+           )) 
     ([kw p]
-     (if (= kw :dst)
+     (cond (= kw :dst)
        ((comp Math/sqrt (partial reduce +) (partial map #(* % %)) (partial map -)) [x y] (p :crt))
-       '()
-       ) 
-       ) 
+       )) 
      )
-    )
+
+     )
+  
  
 
 (println "Exercici 2:")
