@@ -1,19 +1,19 @@
 (ns lab6)
 
 ;; Exercici 1
-
-(comment
-  
-  (defn memoize [f]
+(defn memoize2 [f]
   (let [mem (atom {})]
     (fn [& args]
+      ;(println "before" args)
       (if-let [e (find @mem args)]
         (val e)
         (let [ret (apply f args)]
+          ;(println "after" args)
           (swap! mem assoc args ret)
           ret)))))
-)
+
 (defn fib [n]
+  ;(println n)
   (if (<= n 1)
     n
     (+ (fib (dec n)) (fib (- n 2)))))

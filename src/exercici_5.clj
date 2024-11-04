@@ -44,6 +44,7 @@
 
 (println)
 
+(defn pow3 [x p] (reduce * 1 (for [_ (range p)] x)))
 ;; apartat 3
 (defn power2 [x p]
     (loop [i p

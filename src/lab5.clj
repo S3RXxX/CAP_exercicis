@@ -57,9 +57,9 @@
 (println)
 
 ;; Exercici 3
-(defn my-partial [op val]
+(defn my-partial [op & val]
   (fn [& x] 
-    (apply op (conj x val))
+    (apply op (concat val x))
     
     )
   )

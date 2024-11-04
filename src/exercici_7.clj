@@ -54,6 +54,9 @@
 
 (println)
 
+(defn remove-list2 [x y]
+  (filter #(not (some #{%} y)) x))
+
 ;; apartat 3
 (defn odds-n-evens [lst]
     (loop [aux lst even_lst '() odd_lst '()]
