@@ -9,7 +9,7 @@
 
 ;;1
 (defn size [a]
-  (let [{:keys [val L R]} a]
+  (let [{:keys [L R]} a]
     (if (nil? a) 0
         (+ 1 (size L) (size R)))
     )
@@ -24,7 +24,7 @@
 
 ;;2
 (defn height [a]
-  (let [{:keys [val L R]} a]
+  (let [{:keys [L R]} a]
     (if (nil? a) 0
         (inc (max (height L) (height R))))
     )
@@ -109,16 +109,17 @@
 
 ;;8
 (defn build [p i]
-  (let [arrel (first p) 
-        L (take-while #(not= arrel %) i)
-        R (pop (drop-while #(not= arrel %) i))]
-    {:val arrel :L (build Lp Li) :R (build Rp Rp)}
-    )
-  )
+  (if (empty? p) nil
+    (let [arrel (first p)
+          Li (take-while #(not= arrel %) i)
+          Ri (rest (drop-while #(not= arrel %) i))
+          Lp (take (count Li) (rest p))
+          Rp (drop (count Li) (rest p))]
+
+      {:val arrel :L (build Lp Li) :R (build Rp Ri)})))
 
 (def preO '(1 2 4 5 3 6 7))
 (def inO '(4 2 5 1 6 3 7))
 (println "build")
 (println (post-order (build preO inO)))
 (println)
-
