@@ -66,7 +66,7 @@
 
 ;; 9
 (defn generate-hammings 
-  ([] (generate-hammings (sorted-set)))
+  ([] (generate-hammings (sorted-set 1N)))
   ([ss] (let [n (first ss)
               s (disj ss n)]
           (cons n (lazy-seq (generate-hammings (conj s (* n 2N) (* n 3N) (* n 5N)))))
