@@ -33,12 +33,9 @@
 (println)
 
 ;; Composició de funcions
-(defmacro cf [f1 f2]
-  `(fn [& args#]
-     (let [func1# (if (seq? ~f1) ~f1 (~f1))
-           func2# (if (seq? ~f2) ~f2 (~f2))] 
-           ((@func1# (apply (@func2# args#))))
-           )
+(defmacro cf [& lf]
+     (let [lpf# (map #(if (seq? %) `(partial ~@%) %) lf)] 
+           `(comp ~@lpf#)
            )
        
   )
@@ -51,14 +48,15 @@
 (def producte-escalar (cf (apply +) (map *)))
 (println (producte-escalar [1 2 3] [2 2 2]))  ;; 12
 
-;; (def numParells (cf count (filter even?)))
-;; (println (numParells [2 3 4]))  ;; 2
+(def numParells (cf count (filter even?)))
+(println (numParells [2 3 4]))  ;; 2
 
 
-;; (defn consumeix [f]
+(defn consumeix [f x y]
+  (list (partial f x) y)
+  )
 
-;; )
-
-;; (def numVegades (cf count (apply filter) (consumeix =)))
-;; (println (numVegades 3 [3 2 3]))
+(println "Consumeix")
+(def numVegades (cf count (apply filter) (consumeix =)))
+(println (numVegades 3 [3 2 3]))
 (println)
