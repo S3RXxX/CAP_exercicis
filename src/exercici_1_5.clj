@@ -6,7 +6,7 @@
 
 ;;exercici 2
 (def n 25)
-(println "exercici 2:" (or (and (<= 10 n) (>= 20 n)) (and (<= 30 n) (>= 40))))
+(println "exercici 2:" (or (and (<= 10 n) (>= 20 n)) (and (<= 30 n) (>= 40 n))))
 
 ;; exercici 3
 (defn parell? [k] (= 0 (mod k 2)))
